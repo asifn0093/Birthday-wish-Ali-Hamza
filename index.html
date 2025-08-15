@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belated Birthday — From the Heart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1:#ff9a9e; /* pink */
+      --bg-2:#fad0c4; /* peach */
+      --bg-3:#fbc2eb; /* lavender */
+      --card:#ffffffdd;
+      --ink:#222;
+      --accent:#ff6f61;
+      --accent-2:#6c63ff;
+      --muted:#666;
+      --ring: #ff6f61;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--ink);
+      background: linear-gradient(120deg, var(--bg-1), var(--bg-3), var(--bg-2));
+      background-size: 200% 200%;
+      animation: gradientShift 18s ease-in-out infinite;
+      overflow-x:hidden;
+    }
+    @keyframes gradientShift{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    /* Layout */
+    .wrap{max-width:980px;margin:0 auto;padding:24px}
+    header{
+      display:grid;grid-template-columns:1fr;gap:20px;align-items:center;justify-items:center;margin-top:24px
+    }
+
+    .hero{
+      position:relative;width:100%;overflow:hidden;border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.15);
+      background: radial-gradient(1200px 400px at 80% -10%, rgba(255,255,255,.36), transparent 50%),
+                  linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+      backdrop-filter: blur(6px);
+      border:1px solid rgba(255,255,255,.35);
+    }
+
+    .hero img{
+      width:100%; height:420px; object-fit:cover; display:block; filter: saturate(1.05) contrast(1.05);
+      transform: scale(1.02);
+    }
+    .hero .badge{
+      position:absolute; top:18px; left:18px; background: #ffffffcc; color:#333; padding:8px 14px; border-radius:999px; font-weight:600; font-size:14px; box-shadow:0 6px 16px rgba(0,0,0,.1);
+      backdrop-filter: blur(8px);
+    }
+    .hero .title{
+      position:absolute; bottom:22px; left:22px; right:22px; color:#fff; text-shadow:0 6px 24px rgba(0,0,0,.35);
+    }
+    .hero h1{ margin:0; font-size: clamp(28px, 4vw, 48px); font-weight:800; letter-spacing:.2px}
+    .hero p{ margin:6px 0 0; font-weight:500; opacity:.95 }
+
+    /* Floating balloons */
+    .balloon{ position:absolute; bottom:-120px; width:44px; height:60px; border-radius:50% 50% 45% 45%; background:var(--accent);
+      box-shadow: inset -6px -10px 18px rgba(0,0,0,.15); transform: translateY(0) rotate(2deg);
+      animation: floatUp 16s linear infinite;
+    }
+    .balloon::after{ content:""; position:absolute; bottom:-24px; left:50%; width:2px; height:26px; background:#fff; opacity:.9 }
+    .b2{ left:12%; background:var(--accent-2); animation-duration:18s; animation-delay:2s; }
+    .b3{ left:28%; background:#ffd166; animation-duration:20s; animation-delay:4s; }
+    .b4{ left:72%; background:#06d6a0; animation-duration:22s; animation-delay:1s; }
+    .b5{ left:86%; background:#ef476f; animation-duration:19s; animation-delay:3s; }
+    @keyframes floatUp{ 0%{ transform: translateY(0) } 100%{ transform: translateY(-140vh) } }
+
+    /* Article card */
+    article{
+      margin-top:-72px; position:relative; z-index:2;
+      background: var(--card); border:1px solid rgba(255,255,255,.7); border-radius:28px; padding:28px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.16);
+    }
+    .meta{ display:flex; gap:14px; align-items:center; flex-wrap:wrap; color:var(--muted); font-size:14px; }
+    .meta .dot{ width:6px; height:6px; border-radius:999px; background:var(--accent); display:inline-block }
+
+    .lead{ font-size: clamp(18px, 2.2vw, 22px); line-height:1.8; margin:14px 0 6px }
+    .quote{ background:linear-gradient( to right, #fff, #fff0 ); border-left:4px solid var(--accent); padding:14px 14px; margin:18px 0; border-radius:12px; font-weight:600 }
+
+    .card{ background:#fff; border:1px solid #eee; border-radius:20px; padding:18px 18px; box-shadow:0 12px 34px rgba(0,0,0,.08) }
+
+    .grid{ display:grid; grid-template-columns:1fr; gap:18px; }
+    @media (min-width: 760px){ .grid{ grid-template-columns: 1.3fr 1fr } }
+
+    .btn{
+      appearance:none; border:0; background:linear-gradient(135deg, var(--accent), #ff9e81);
+      color:white; padding:14px 18px; border-radius:14px; font-weight:700; cursor:pointer; box-shadow: 0 12px 26px rgba(255,111,97,.35);
+      transition: transform .15s ease, box-shadow .15s ease; display:inline-flex; align-items:center; gap:10px
+    }
+    .btn:focus{ outline:3px solid rgba(255,111,97,.35); outline-offset:3px }
+    .btn:hover{ transform: translateY(-2px); box-shadow: 0 20px 36px rgba(255,111,97,.42) }
+
+    /* Footer */
+    footer{ text-align:center; color:#333; margin:22px 0 12px }
+    .small{ color:var(--muted); font-size:13px }
+
+    /* Entrance animations */
+    .reveal{ opacity:0; transform: translateY(16px); transition: all .7s ease; }
+    .reveal.show{ opacity:1; transform: translateY(0) }
+
+    /* Tiny form */
+    .panel{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:12px }
+    .panel input{ padding:12px 14px; border-radius:12px; border:1px solid #e5e7eb; outline:none; width: clamp(160px, 28vw, 260px)}
+    .panel input:focus{ border-color: var(--ring); box-shadow: 0 0 0 4px rgba(255,111,97,.15) }
+    .tag{ display:inline-flex; align-items:center; gap:8px; padding:6px 12px; background:#fff; border:1px solid #eee; border-radius:999px; font-size:13px }
+
+    /* Confetti dots */
+    .confetti{ position:fixed; inset:0; pointer-events:none }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="hero reveal">
+        <span class="badge" id="postDate">Posted on — </span>
+        <img id="heroImg" src="Images/Friends ForEver.jpg" alt="Birthday celebration" />
+        <div class="title">
+          <h1>Belated Happy Birthday, <span style="color:#ffe66d" id="friendNameTitle">Ali Hamza</span> 🎂</h1>
+          <p>Thoda late, lekin dil se — your day still matters to me.</p>
+        </div>
+        <!-- Balloons -->
+        <div class="balloon b1" style="left:3%"></div>
+        <div class="balloon b2"></div>
+        <div class="balloon b3"></div>
+        <div class="balloon b4"></div>
+        <div class="balloon b5"></div>
+      </div>
+    </header>
+
+    <article class="reveal">
+      <div class="meta">
+        <span class="tag">🎉 Belated Wish</span>
+        <span class="tag">🤝 Brothers-like Bond</span>
+        <span class="dot"></span>
+        <span>Written by <strong> Asif Nawaz</strong></span>
+      </div>
+
+      <p class="lead">
+        Kabhi kabhi zindagi ki bhaag-daud me important moments miss ho jaate hain — aur is baar maine <span id="friendNameInline" style="font-weight:700">tumhara</span> birthday miss kar diya. Is baat ka mujhe <em>waqai</em> bura laga. Lekin jo dil se nikle, woh der se sahi, par <strong>asli</strong> hota hai.
+      </p>
+
+      <p>
+        Tu sirf dost nahi, mere liye <strong>bhai</strong> jaisa hai. Saath hansi, mazaak, struggles aur late-night talks—yeh sab mere liye bohot qeemti hai. Allah se dua hai ke tumhari zindagi me hamesha rehmaten barasti rahen, sehat aur sukoon mile, aur har dua qabool ho. 🤲
+      </p>
+
+      <div class="quote">"Late sahi, par dil se — Happy Belated Birthday! Ab party pending reh gai bhai 😉"</div>
+
+      <div class="grid">
+        <section class="card">
+          <h3 style="margin-top:0">Dil se ek chhota note ❤️</h3>
+          <p>
+            Jab bhi tumhe zarurat ho, main yahin hoon. Aaj nahi to kal, lekin humari dosti hamesha on-time rahegi. Isi bahaane, aaj ke din ko hum dono <em>bonus celebration</em> bana lete hain! 🎈
+          </p>
+          </section>
+
+        <section class="card">
+          <h3 style="margin-top:0">Quick Blessings ✨</h3>
+          <ul style="margin:0 0 12px 18px">
+            <li>Khushi aur sehat ka saaya hamesha tum par rahe.</li>
+            <li>Har mehnat ka behtareen phal mile.</li>
+            <li>Ghar par barkat aur sukoon ho.</li>
+          </ul>
+          <button class="btn" id="celebrateBtn">Send Love & Confetti 🎊</button>
+        </section>
+      </div>
+    </article>
+
+    <footer class="reveal">
+      <p>— From your brother, <strong> Asif Nawaz</strong> ❤️</p>
+ 
+    </footer>
+  </div>
+
+  <canvas class="confetti" id="confetti"></canvas>
+
+  <script>
+    // Set today's date (Asia/Karachi local assumed by the browser)
+    (function setDate(){
+      const el = document.getElementById('postDate');
+      const today = new Date();
+      const opts = { year: 'numeric', month: 'long', day: 'numeric' };
+      el.textContent = 'Posted on — ' + today.toLocaleDateString(undefined, opts);
+    })();
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); }
+      })
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Personalize
+    const nameTitle = document.getElementById('friendNameTitle');
+    const nameInline = document.getElementById('friendNameInline');
+    const heroImg = document.getElementById('heroImg');
+    const nameInput = document.getElementById('nameInput');
+    const imgInput = document.getElementById('imgInput');
+    document.getElementById('applyBtn').addEventListener('click', ()=>{
+      if(nameInput.value.trim()){
+        nameTitle.textContent = nameInput.value.trim();
+        nameInline.textContent = nameInput.value.trim();
+      }
+      if(imgInput.value.trim()){
+        heroImg.src = imgInput.value.trim();
+      }
+    });
+
+    // Minimal confetti (no external libs)
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let W, H, confetti = [], rafId;
+    function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+
+    function burst(x, y){
+      for(let i=0;i<140;i++){
+        confetti.push({
+          x, y,
+          vx:(Math.random()-0.5)*8,
+          vy:(Math.random()-0.8)*8 - 4,
+          g: 0.18 + Math.random()*0.08,
+          s: 2 + Math.random()*3,
+          a: 1,
+          life: 60 + Math.random()*40,
+          hue: 300*Math.random()
+        })
+      }
+      if(!rafId) animate();
+    }
+
+    function animate(){
+      rafId = requestAnimationFrame(animate);
+      ctx.clearRect(0,0,W,H);
+      confetti.forEach((p,i)=>{
+        p.vy += p.g; p.x += p.vx; p.y += p.vy; p.life -= 1; p.a = Math.max(0, p.life/100);
+        ctx.save();
+        ctx.globalAlpha = p.a;
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.x+p.y)/100);
+        ctx.fillStyle = `hsl(${p.hue}, 90%, 55%)`;
+        ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s*1.6);
+        ctx.restore();
+        if(p.y>H || p.life<=0) confetti.splice(i,1);
+      })
+      if(confetti.length===0){ cancelAnimationFrame(rafId); rafId=null }
+    }
+
+    document.getElementById('celebrateBtn').addEventListener('click', (e)=>{
+      const rect = e.target.getBoundingClientRect();
+      burst(rect.left + rect.width/2, rect.top + window.scrollY);
+    });
+  </script>
+</body>
+</html>
